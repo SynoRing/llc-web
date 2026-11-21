@@ -5,6 +5,7 @@ import { en, zh } from "./src/copy.js";
 import { crawlerFiles, pageMetadata } from "./seo.js";
 
 const template = fileURLToPath(new URL("./index.html", import.meta.url));
+const traceDrawing = new URL("./art/gesture-traces.svg", import.meta.url);
 
 function languageOptions(current) {
   return [[zh, "中文", "简体中文"], [en, "EN", "English"]].map(([copy, short, name]) =>
@@ -30,6 +31,7 @@ export default defineConfig(({ command, isPreview }) => ({
           const copy = {
             ...locale,
             ...pageMetadata(locale),
+            gestureTraces: readFileSync(traceDrawing, "utf8"),
             languageOptions: languageOptions(locale),
             productUrl: new URL(chinese ? "/zh" : "/", productOrigin).href.replace(/\/$/, ""),
           };

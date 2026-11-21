@@ -58,12 +58,19 @@ def draw_svg(tracks):
         ink = .018 + envelope * (.14 + .075 * np.cos(index * .93)**2)
         weight = .56 + .64 * envelope
         curve = bezier_path(x * width, center * height)
-        paths.append(f'    <path id="thread-{index}" pathLength="1000" stroke-width="{weight:.2f}" '
+        paths.append(f'    <path stroke-width="{weight:.2f}" '
                      f'stroke-opacity="{ink:.3f}" d="{curve}"/>')
 
     return "\n".join([
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" stroke="#909aa3">',
-        '  <g id="contours" fill="none" stroke-linecap="round">',
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
+        'preserveAspectRatio="none" focusable="false">',
+        '  <defs>',
+        '    <linearGradient id="trace-ink" gradientUnits="userSpaceOnUse" x2="0" y2="150">',
+        '      <stop stop-color="#a7b1ba" stop-opacity="0"/>',
+        '      <stop offset="1" stop-color="#a7b1ba"/>',
+        '    </linearGradient>',
+        '  </defs>',
+        '  <g stroke="url(#trace-ink)" opacity=".84" fill="none" stroke-linecap="round">',
         *paths,
         '  </g>',
         '</svg>',
@@ -75,5 +82,5 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("clip", type=Path)
     args = parser.parse_args()
-    output = Path(__file__).resolve().parents[1] / "public/assets/gesture-traces.svg"
+    output = Path(__file__).with_name("gesture-traces.svg")
     output.write_text(draw_svg(sample_fingertips(args.clip)), encoding="utf-8")

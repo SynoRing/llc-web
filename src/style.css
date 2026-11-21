@@ -209,14 +209,10 @@ header .brand img { filter: invert(1); }
   z-index: -3;
   pointer-events: none;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .trace-pulses {
-    animation: trace-travel 24s linear infinite paused;
-  }
-  .hero.is-playing .trace-pulses { animation-play-state: running; }
-  @keyframes trace-travel {
-    to { stroke-dashoffset: -1000; }
-  }
+.gesture-traces svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 @media (max-width: 700px) {
   .gesture-traces {

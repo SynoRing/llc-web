@@ -58,21 +58,7 @@
     </header>
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
-        <svg class="gesture-traces" aria-hidden="true" focusable="false"
-          viewBox="0 0 1920 910" preserveAspectRatio="none" fill="none" stroke-linecap="round">
-          <defs>
-            <linearGradient id="trace-ink" gradientUnits="userSpaceOnUse" x2="0" y2="150">
-              <stop stop-color="#a7b1ba" stop-opacity="0" />
-              <stop offset="1" stop-color="#a7b1ba" />
-            </linearGradient>
-          </defs>
-          <use href="/assets/gesture-traces.svg#contours" stroke="url(#trace-ink)" opacity=".84" />
-          <g class="trace-pulses" stroke="url(#trace-ink)">
-            <use href="/assets/gesture-traces.svg#thread-12" stroke-dasharray="1 22 6 221" />
-            <use href="/assets/gesture-traces.svg#thread-23" stroke-dasharray="3 83 1 413" />
-            <use href="/assets/gesture-traces.svg#thread-33" stroke-dasharray="5 39 1 155" />
-          </g>
-        </svg>
+        <div class="gesture-traces" aria-hidden="true">{{gestureTraces}}</div>
         <div class="hero-art" aria-hidden="true">
           <video
             class="gesture-film"
