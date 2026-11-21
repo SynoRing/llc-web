@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="{{lang}}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#101010" />
+    <meta name="robots" content="max-image-preview:large" />
+    <title>{{title}}</title>
+    <meta name="description" content="{{description}}" />
+    <link rel="canonical" href="{{canonical}}" />
+    <link rel="alternate" hreflang="en" href="{{siteOrigin}}/" />
+    <link rel="alternate" hreflang="zh-CN" href="{{siteOrigin}}/zh/" />
+    <link rel="alternate" hreflang="x-default" href="{{siteOrigin}}/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:description" content="{{description}}" />
+    <meta property="og:site_name" content="Syno Labs" />
+    <meta property="og:url" content="{{canonical}}" />
+    <meta property="og:locale" content="{{ogLocale}}" />
+    <meta property="og:locale:alternate" content="{{ogAlternateLocale}}" />
+    <meta property="og:image" content="{{siteOrigin}}/assets/share.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="{{shareAlt}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{title}}" />
+    <meta name="twitter:description" content="{{description}}" />
+    <meta name="twitter:image" content="{{siteOrigin}}/assets/share.jpg" />
+    <meta name="twitter:image:alt" content="{{shareAlt}}" />
+    <script type="application/ld+json">{{structuredData}}</script>
+    <link rel="icon" href="/assets/favicon.svg" />
+    <link rel="preload" href="/assets/figtree.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body id="top">
+    <a class="skip" href="#main">{{skip}}</a>
+    <header>
+      <div class="nav-wrap wrap">
+        <a class="brand" href="{{home}}" aria-label="Syno Labs">
+          <img src="/assets/syno-wordmark.svg" alt="" width="202" height="80" />
+        </a>
+        <nav class="main-nav" id="navigation" aria-label="{{nav}}">
+          <a href="#research">{{research}}</a>
+          <a href="#engine">{{engine}}</a>
+          <a href="#hardware">{{hardware}}</a>
+          <span class="menu-language">{{languageOptions}}</span>
+        </nav>
+        <div class="nav-end">
+          <span class="language-switch">{{languageOptions}}</span>
+          <a class="contact-nav" href="#contact">{{contact}}</a>
+          <button hidden class="menu-button" aria-label="{{menu}}" aria-controls="navigation" aria-expanded="false">
+            <i></i><i></i>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="gesture-traces" aria-hidden="true"></div>
+        <div class="hero-art" aria-hidden="true">
+          <video
+            class="gesture-film"
+            muted
+            playsinline
+            loop
+            preload="none"
+            width="1296"
+            height="906"
+            poster="/assets/gesture-sequence.webp"
+            src="/assets/gesture-sequence.mp4"
+          ></video>
+        </div>
+        <div class="wrap hero-inner">
+          <div class="hero-type">
+            <h1 id="hero-title">{{headlineA}}<br /><span>{{headlineB}}</span></h1>
+            <p class="hero-intro">{{intro}}</p>
+            <a class="text-link" href="#research">{{explore}}</a>
+          </div>
+          <button
+            type="button"
+            class="playback hero-playback"
+            data-pause="{{pause}}"
+            data-play="{{play}}"
+            aria-label="{{pause}}"
+            hidden
+          >
+            <i aria-hidden="true"></i>
+          </button>
+        </div>
+      </section>
+      <section id="research" class="research section">
+        <div class="wrap">
+          <div class="section-lead">
+            <div class="section-label"><span class="hairline"></span>{{research}}</div>
+            <div>
+              <h2>{{thesisA}}<br />{{thesisB}}</h2>
+              <p class="lead-copy">{{thesis}}</p>
+            </div>
+          </div>
+          <div class="principles">
+            <article>
+              <div class="symbol waves" aria-hidden="true"></div>
+              <h3>{{themeA}}</h3>
+              <p>{{themeACopy}}</p>
+            </article>
+            <article>
+              <div class="symbol layers" aria-hidden="true"><i></i><i></i><i></i></div>
+              <h3>{{themeB}}</h3>
+              <p>{{themeBCopy}}</p>
+            </article>
+            <article>
+              <div class="symbol correction" aria-hidden="true"><i></i><i></i></div>
+              <h3>{{themeC}}</h3>
+              <p>{{themeCCopy}}</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section id="engine" class="engine section">
+        <div class="wrap">
+          <div class="section-lead">
+            <div class="section-label"><span class="hairline"></span>{{engine}}</div>
+            <div>
+              <h2>{{demoTitle}}</h2>
+              <p class="lead-copy">{{demoIntro}}</p>
+            </div>
+          </div>
+          <div id="experiment" data-step="0" data-folder="0">
+            <div class="experiment-copy">
+              <div class="stage-copy" aria-live="off" aria-atomic="true">
+                <div data-panel="0">
+                  <h3>{{readout0}}</h3>
+                  <p>{{note0}}</p>
+                </div>
+                <div data-panel="1" inert>
+                  <h3>{{readout1}}</h3>
+                  <p>{{note1}}</p>
+                </div>
+                <div data-panel="2" inert>
+                  <h3>{{readout2}}</h3>
+                  <p>{{note2}}</p>
+                </div>
+                <div data-panel="3" inert>
+                  <h3>{{readout3}}</h3>
+                  <p>{{note3}}</p>
+                </div>
+                <div data-panel="correction" inert>
+                  <h3>{{correctionTitle}}</h3>
+                  <p>{{correctionNote}}</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                id="study-playback"
+                class="study-playback"
+                data-pause="{{studyPause}}"
+                data-play="{{studyPlay}}"
+                hidden
+              >
+                <i aria-hidden="true"></i><span>{{studyPause}}</span>
+              </button>
+            </div>
+            <div class="instrument">
+              <div class="instrument-head">
+                <span>{{workspace}}</span
+                ><span
+                  class="speech"
+                  data-speech="{{utterance0}}|{{utterance1}}|{{utterance2}}|{{utterance3}}"
+                  data-correction="{{correctionSpeech}}"
+                  data-revised="{{revisedSpeech}}"
+                  >{{utterance0}}</span
+                >
+              </div>
+              <div class="desk">
+                <div class="source-file">
+                  <div class="waveform" aria-hidden="true"></div>
+                  <div class="file-label">{{file}}</div>
+                </div>
+                <svg class="routes" aria-hidden="true" focusable="false">
+                  <path class="wire" data-wire="0" />
+                  <path class="wire" data-wire="1" />
+                  <path class="travel" />
+                  <circle class="packet" r="3.5" />
+                </svg>
+                <div class="folders" role="group" aria-label="{{folders}}">
+                  <button type="button" data-dest="0" class="folder" aria-pressed="true" disabled>
+                    <i class="folder-icon"></i><span>{{archive}}</span
+                    ><small class="arrived" hidden>{{file}}</small>
+                  </button>
+                  <button type="button" data-dest="1" class="folder" aria-pressed="false" disabled>
+                    <i class="folder-icon"></i><span>{{review}}</span
+                    ><small class="arrived" hidden>{{file}}</small>
+                  </button>
+                </div>
+              </div>
+              <div class="stage-nav" role="group" aria-label="{{timeline}}">
+                <button data-stage="0" aria-pressed="true">{{listen}}</button
+                ><button data-stage="1" aria-pressed="false">{{ground}}</button
+                ><button data-stage="2" aria-pressed="false">{{prepare}}</button
+                ><button data-stage="3" aria-pressed="false">{{commit}}</button>
+              </div>
+            </div>
+          </div>
+          <div class="integration">
+            <h3>{{integration}}</h3>
+            <p>{{integrationCopy}}</p>
+          </div>
+        </div>
+      </section>
+      <section id="hardware" class="hardware section">
+        <div class="wrap hardware-grid">
+          <div class="product-photo">
+            <img
+              src="/assets/ring-in-hand.webp"
+              decoding="async"
+              alt="{{productAlt}}"
+              width="1300"
+              height="680"
+            />
+          </div>
+          <div class="product-copy">
+            <div class="section-label"><span class="hairline"></span>{{practice}}</div>
+            <h2>{{productTitle}}</h2>
+            <p>{{productBody}}</p>
+            <a class="text-link" href="{{productUrl}}">{{productLink}}</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="contact">
+      <div class="wrap">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="brand" href="{{home}}" aria-label="Syno Labs">
+              <img src="/assets/syno-wordmark.svg" alt="" width="202" height="80" />
+            </a>
+            <p>{{footerDescription}}</p>
+          </div>
+          <nav class="footer-link-groups" aria-label="{{footerNav}}">
+            <div>
+              <h3>{{research}}</h3>
+              <a href="#research">{{researchFocus}}</a>
+              <a href="#engine">{{engine}}</a>
+              <a href="#experiment">{{studyLink}}</a>
+            </div>
+            <div>
+              <h3>{{hardware}}</h3>
+              <a href="{{productUrl}}">{{productTitle}}</a>
+              <a href="{{productUrl}}/about">{{ringAbout}}</a>
+              <a href="{{productUrl}}/demo">{{ringDemo}}</a>
+            </div>
+            <div>
+              <h3>{{contact}}</h3>
+              <a class="footer-email" href="mailto:contact@synolabs.org">contact@synolabs.org</a>
+            </div>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Syno Labs LLC</span>
+          <a href="#top">{{toTop}} <span aria-hidden="true">↑</span></a>
+        </div>
+        <details class="credits">
+          <summary>{{credits}}</summary>
+          <div>
+            <a href="https://www.pexels.com/video/close-up-of-a-hand-raising-the-index-finger-9465544/">{{pointCredit}}</a>
+            <a href="https://www.pexels.com/video/a-person-doing-hand-gestures-9019587/">{{releaseCredit}}</a>
+            <a href="https://www.pexels.com/video/close-up-of-hands-doing-gestures-9465182/">{{sweepCredit}}</a>
+            <a href="https://www.pexels.com/license/">{{handLicense}}</a>
+            <p>{{productCredit}}</p>
+          </div>
+        </details>
+      </div>
+    </footer>
+  </body>
+</html>
