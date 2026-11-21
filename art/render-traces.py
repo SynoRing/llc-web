@@ -1,11 +1,10 @@
-"""Build the hero texture from the two-hand take. Usage: render-traces.py 9465182.mp4"""
+"""Draw the hero's SVG signal from the two-hand take. Usage: render-traces.py 9465182.mp4"""
 
 import argparse
 import subprocess
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
 
 
 def sample_fingertips(clip):
@@ -32,41 +31,49 @@ def sample_fingertips(clip):
     return tracks
 
 
-def expose(tracks):
+def bezier_path(x, y):
+    # Knots are equally spaced. Reflecting each incoming handle gives a continuous tangent.
+    handle = (x[1] - x[0]) / 3
+    rise = np.gradient(y, x) * handle
+    sections = [f"M{x[0]:.1f},{y[0]:.1f} C{x[0]+handle:.1f},{y[0]+rise[0]:.1f}"]
+    for i in range(1, len(x)):
+        command = "" if i == 1 else "S"
+        sections.append(f"{command}{x[i]-handle:.1f},{y[i]-rise[i]:.1f} {x[i]:.1f},{y[i]:.1f}")
+    return " ".join(sections)
+
+
+def draw_svg(tracks):
     width, height = 1920, 910
-    x = np.linspace(0, 1, width)
-    y = np.arange(height)[:, None] / height
+    x = np.linspace(0, 1, 73)
     time = np.linspace(0, 1, len(tracks))
-    exposure = np.zeros((height, width))
+    paths = []
     for index, track in enumerate(tracks.T):
         depth = index / (tracks.shape[1] - 1)
         movement = np.interp(x, time, track)
         axis = .905 - .775 * x**1.64 + .34 * (movement - .41)
         spread = .18 + .10 * np.cos(2 * np.pi * x + .9) + .23 * x**2
         center = axis + (depth - .5) * spread + .028 * np.sin(5 * depth + 4.8 * x)
-        offset = (y - center) * 1024
+        # Thin the outer threads and taper their ink, leaving the space between them transparent.
+        envelope = np.sin(np.pi * depth)**.85
+        ink = .018 + envelope * (.14 + .075 * np.cos(index * .93)**2)
+        weight = .56 + .64 * envelope
+        curve = bezier_path(x * width, center * height)
+        paths.append(f'    <path id="thread-{index}" pathLength="1000" stroke-width="{weight:.2f}" '
+                     f'stroke-opacity="{ink:.3f}" d="{curve}"/>')
 
-        light = (.40 + .55 * np.sin(np.pi * depth)**.6) * (.48 + .52 * np.cos(4.6 * x - 2 * depth)**2)
-        grains = .5 + .5 * np.cos(2 * np.pi * (x * (195 + index * .25) + depth))
-        line = np.exp(-.5 * (offset / (.59 + .37 * depth))**2)
-        exposure += light * (34 if index % 7 == 0 else 15) * line * (.68 + .32 * grains)
-        exposure += light * (1.1 + 1.5 * depth) * np.exp(-.5 * (offset / (6 + 9 * depth))**2)
-        if index in (4, 23, 40):
-            sample = np.maximum(0, np.cos(2 * np.pi * (x * width / (16 + index * .3) + depth)))**18
-            exposure += light * 45 * sample * np.exp(-.5 * (offset / 1.35)**2)
-
-    exposure += 8 * np.exp(-.5 * (((x - .72) / .33)**2 + ((y - .59) / .41)**2))
-    exposure += 4.5 * np.exp(-.5 * (((x - .28) / .55)**2 + ((y - 1.07) / .29)**2))
-    exposure *= np.clip(y / .20, 0, 1)
-    mask = Image.fromarray(np.clip(np.rint(exposure * 2.5), 0, 255).astype(np.uint8))
-    plate = Image.new("RGBA", (width, height), "white")
-    plate.putalpha(mask)
-    return plate
+    return "\n".join([
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" stroke="#909aa3">',
+        '  <g id="contours" fill="none" stroke-linecap="round">',
+        *paths,
+        '  </g>',
+        '</svg>',
+        '',
+    ])
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("clip", type=Path)
     args = parser.parse_args()
-    output = Path(__file__).resolve().parents[1] / "public/assets/gesture-traces.webp"
-    expose(sample_fingertips(args.clip)).save(output, method=6, alpha_quality=100)
+    output = Path(__file__).resolve().parents[1] / "public/assets/gesture-traces.svg"
+    output.write_text(draw_svg(sample_fingertips(args.clip)), encoding="utf-8")

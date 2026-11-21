@@ -29,6 +29,6 @@ npm run dev -- --port 4173
 
 - 首屏把三个真人镜头采样到同一张点阵上。食指指向、单手张开、双手划开均按拍摄顺序正放，镜头切换在点阵内完成。[指向 · ROCKETMANN TEAM](https://www.pexels.com/video/close-up-of-a-hand-raising-the-index-finger-9465544/) · [张手 · Kevin Malik](https://www.pexels.com/video/a-person-doing-hand-gestures-9019587/) · [双手 · ROCKETMANN TEAM](https://www.pexels.com/video/close-up-of-hands-doing-gestures-9465182/) · [Pexels 许可](https://www.pexels.com/license/)
 - 动画与静态首帧为 `public/assets/gesture-sequence.mp4` 和 `public/assets/gesture-sequence.webp`。将上述三个原片依次保存为 `9465544.mp4`、`9019587.mp4` 和 `9465182.mp4`，在安装 NumPy、Pillow 和 ffmpeg 的环境中运行 `python3 art/render-hand.py /path/to/clips` 即可重新生成。
-- 首屏背景的细线取自双手划开镜头的指尖轮廓。运行 `python3 art/render-traces.py /path/to/clips/9465182.mp4` 可重新生成背景素材。背景光影和点阵手势共用首屏的播放按钮。
+- 首屏背景的细线取自双手划开镜头的指尖轮廓，浏览器以 SVG 贝塞尔曲线绘制。运行 `python3 art/render-traces.py /path/to/clips/9465182.mp4` 可重新生成 `public/assets/gesture-traces.svg`。沿线移动的光点和点阵手势共用首屏的播放按钮。
 - Syno Ring R1 产品图和标志来自现有 Syno 品牌素材。
 - 英文字体 Figtree 使用 SIL Open Font License 1.1。[字体作者](https://github.com/erikdkennedy/figtree) · [字体许可](public/assets/figtree-license.txt)
